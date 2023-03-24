@@ -1,0 +1,48 @@
+{% extends "employee_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+<div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Attendance</h4>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      {% if status == 'a' %}
+                      <button id='timeout' class="btn btn-primary mr-2" data-catid="{{u.id}}">Time out</button>
+                      {% else %}
+                      <button type="submit" class="btn btn-primary mr-2">Make Attendance</button>
+                      {% endif %}
+                    </form>
+                  </div>
+                </div>
+              </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+     $("#timeout").on('click', function () {
+
+  var id =$(this).attr("data-catid");
+  var status = 0;
+
+  $.ajax({
+    url: '{% url "timeout" %}',
+    data: {
+      'status': status,
+      'id': id,
+    },
+    dataType: 'json',
+    success: function (data) {
+      if (data.success) {
+        location.reload();
+        // here you update the HTML to change the active to innactive
+      }else{
+        alert("ajax call not success.");
+      }
+    }
+  });
+
+});
+</script>
+
+{% endblock %}

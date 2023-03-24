@@ -1,0 +1,124 @@
+{% extends "leader_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+            <div class="row">
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Number of Employees</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">{{totalemp}}</h2>
+                        </div>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-account text-primary ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Pending Approvals</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">{{ pending.count }}</h2>
+                        </div>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-lan-pending text-danger ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Total Awards</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">{{emp.count}}</h2>
+                        </div>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-trophy text-success ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">New Awards</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th> Employee </th>
+                            <th> Reason</th>
+                            <th> Date </th>
+                            <th> Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for i in emp %}
+                          <tr>
+                            <td>{{i.employee.username}}</td>
+                            <td>{{i.reason}}</td>
+                            <td>{{i.createdate}}</td>
+                            {% if i.status == 0 %}
+                            <td><a class='btn btn-info' href='#'>Pending</a></td>
+                            {% elif i.status == 0 %}
+                            <td><a class='btn btn-success' href='#}'>Aproved</a></td>
+                            {% else %}
+                            <td><a class='btn btn-danger' href='#'>Rejected</a></td>
+                            {% endif %}
+                            <td><a class='btn btn-danger' href='emprewarddelete/{{i.id}}'>Delete</a></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-xl-4 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between">
+                      <h4 class="card-title">Recent Expire</h4>
+                      <p class="text-muted mb-1 small">View all</p>
+                    </div>
+                    <div class="preview-list">
+                      <div class="preview-item border-bottom">
+                        {% for i in t %}
+                        <div class="preview-item-content d-flex flex-grow">
+                          <div class="flex-grow">
+                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                              <h6 class="preview-subject">{{i.employee}}</h6>
+                              <p class="text-muted text-small">{{i.startdate}}</p>
+                            </div>
+                            <p class="text-muted">{{i.enddate}}</p>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "admin_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+<div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Shift Form</h4>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Shift Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Shift Name" name="sn">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Start Time</label>
+                        <div class="col-sm-9">
+                          <input type="time" class="form-control" id="exampleInputEmail2" name='starttime'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">End Time</label>
+                        <div class="col-sm-9">
+                          <input type="time" class="form-control" id="exampleInputEmail2" name='endtime'>
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button type="reset" class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+</div>
+
+{% endblock %}

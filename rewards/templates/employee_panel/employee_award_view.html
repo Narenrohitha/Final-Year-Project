@@ -1,0 +1,86 @@
+{% extends "employee_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+<div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Reward Apply Form</h4>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Reason</label>
+                        <div class="col-sm-9">
+                          <select id="exampleInputEmail2" name='reason' required>
+                            <option value='maintenance'>Maintenance</option>
+                            <option value='workdone'>Work done</option>
+                            <option value="achievement">Achievement</option>
+                            <option value='activity'>Activity</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Description</label>
+                        <div class="col-sm-9">
+                          <Textarea type="text" class="form-control" id="exampleInputEmail2" name='desc' placeholder="Description" required></Textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Proof</label>
+                        <div class="col-sm-9">
+                          <input type="file" class="form-control" id="exampleInputEmail2" name='proof'
+                          placeholder="Reward Benifit">
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button type="reset" class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+<div class="page-header">
+              <h3 class="page-title"> Rewards tables</h3>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Rewards Tables</h4>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th> Employee </th>
+                            <th> Reason</th>
+                            <th> Date </th>
+                            <th> Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for i in emp %}
+                          <tr>
+                            <td>{{i.employee.username}}</td>
+                            <td>{{i.reason}}</td>
+                            <td>{{i.createdate}}</td>
+                            {% if i.status == 0 %}
+                            <td><a class='btn btn-info' href='#'>Pending</a></td>
+                            {% elif i.status == 0 %}
+                            <td><a class='btn btn-success' href='#}'>Aproved</a></td>
+                            {% else %}
+                            <td><a class='btn btn-danger' href='#'>Rejected</a></td>
+                            {% endif %}
+                            <td><a class='btn btn-danger' href='emprewarddelete/{{i.id}}'>Delete</a></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+</div>
+
+{% endblock %}

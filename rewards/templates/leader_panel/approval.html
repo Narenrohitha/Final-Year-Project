@@ -1,0 +1,95 @@
+{% extends "leader_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+<div class="page-header">
+              <h3 class="page-title"> Rewards tables</h3>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Approval  Tables</h4>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th> Employee </th>
+                            <th> Reason</th>
+                            <th> Date </th>
+                            <th> Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for i in emp %}
+                          <tr>
+                            <td>{{i.employee}}</td>
+                            <td>{{i.reason}}</td>
+                            <td>{{i.createdate}}</td>
+                            <td><a class='btn btn-info' href='#'>Pending</a></td>
+                            <td><button class='btn btn-success' id='approved' data-catid='{{i.id}}'>Aproved</button>
+                            <button class='btn btn-danger' id='rejected' data-catid='{{i.id}}'>Rejected</button></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+     $("#approved").on('click', function () {
+
+  var id =$(this).attr("data-catid");
+  var status = 1;
+
+  $.ajax({
+    url: '{% url "approved" %}',
+    data: {
+      'status': status,
+      'id': id,
+    },
+    dataType: 'json',
+    success: function (data) {
+      if (data.success) {
+        location.reload();
+        // here you update the HTML to change the active to innactive
+      }else{
+        alert("ajax call not success.");
+      }
+    }
+  });
+
+});
+</script>
+<script type="text/javascript">
+     $("#rejected").on('click', function () {
+
+  var id =$(this).attr("data-catid");
+  var status = 2;
+
+  $.ajax({
+    url: '{% url "rejected" %}',
+    data: {
+      'status': status,
+      'id': id,
+    },
+    dataType: 'json',
+    success: function (data) {
+      if (data.success) {
+        location.reload();
+        // here you update the HTML to change the active to innactive
+      }else{
+        alert("ajax call not success.");
+      }
+    }
+  });
+
+});
+</script>
+
+{% endblock %}

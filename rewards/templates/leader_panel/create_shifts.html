@@ -1,0 +1,63 @@
+{% extends "leader_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+<div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Create shifts</h4>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Employee Name</label>
+                        <div class="col-sm-9">
+                          <select name='empname'>
+                            <option>--Select--</option>
+                            {% for i in emp %}
+                            <option value={{i.id}}>{{i.user}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      
+                    <div class="form-group row">
+                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Shift time</label>
+                        <div class="col-sm-9">
+                          <select name='shift'>
+                            <option>--Select--</option>
+                            {% for j in shift %}
+                            <option value={{j.id}}>{{j.shiftname}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button type="reset" class="btn btn-dark">Cancel</button>
+                    </form>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th> Employee </th>
+                            <th> Shift</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for i in cs %}
+                          <tr>
+                            <td>{{i.employee}}</td>
+                            <td>{{i.shift}}</td>
+                            <td><a class='btn btn-danger' href='createshiftdelete/{{i.id}}'>Delete</a></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "admin_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+<div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Employee Form</h4>
+                    <p class="card-description"> Horizontal form layout </p>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Employee Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Employee name" name="empname">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email" name='email'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputMobile" class="col-sm-3 col-form-label">Mobile</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="exampleInputMobile" placeholder="Mobile number" name='phone'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name='pwd'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Re Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control" id="exampleInputConfirmPassword2" placeholder="Password" name='repwd'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Qualification</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="exampleInputConfirmPassword2" placeholder="Qualification" name='qualification'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="exampleInputConfirmPassword2" placeholder="Address" name='address'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Photo</label>
+                        <div class="col-sm-9">
+                          <input type="file" class="form-control" id="exampleInputConfirmPassword2" placeholder="Password" name='profile'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Role</label>
+                        <div class="col-sm-9">
+                          <select name='role'>
+                            <option value='employee'>Employee</option>
+                            
+                            <option value="leader">Leader</option>
+                           
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Department</label>
+                        <div class="col-sm-9">
+                          <select name='dept'>
+                            {% for i in dept %}
+                            <option value='{{i.dept_name}}'>{{i.dept_name}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Leader</label>
+                        <div class="col-sm-9">
+                          <select name='leader'>
+                            <option>Self</option>
+                            {% for i in leader %}
+                            <option value='{{i.user.username}}'>{{i.user.username}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Date of Joining</label>
+                        <div class="col-sm-9">
+                          <input type="date" class="form-control" id="exampleInputConfirmPassword2"  name='doj'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Salary</label>
+                        <div class="col-sm-9">
+                          <input type="number" class="form-control" id="exampleInputConfirmPassword2" placeholder="salary" name='salary'>
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+</div>
+
+{% endblock %}

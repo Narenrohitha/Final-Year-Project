@@ -1,0 +1,59 @@
+{% extends "admin_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+  <center><h3>Awards Report</h3>
+<div class="col-md-12 grid-margin stretch-card">
+
+  <div class="container">
+    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+            <div class="form-group row">
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Start Date</label>
+                        <div class="col-sm-9">
+                          <input type="date" class="form-control" id="exampleInputEmail2" name='sd'>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">End Date</label>
+                        <div class="col-sm-9">
+                          <input type="date" class="form-control" id="exampleInputEmail2" name='ed'>
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button type="reset" class="btn btn-dark">Cancel</button>
+                    </form><br><br>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th> Employee </th>
+                            <th> Reason </th>
+                            <th> Description </th>
+                            <th> Createdate</th>
+                            <th> Status </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for i in result %}
+                          <tr>
+                            <td>{{i.employee}}</td>
+                            <td>{{i.reason}}</td>
+                            <td>{{i.description}}</td>
+                            <td>{{i.createdate}}</td>
+                            <td>
+                              {% if i.status == 0 %}
+                              <a class='btn btn-primary'>Pending</a>
+                              {% elif i.status == 1 %}
+                              <a class='btn btn-sucess'>Completed</a>
+                              {% endif %}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+</div>
+</div>
+</div>
+{% endblock %}

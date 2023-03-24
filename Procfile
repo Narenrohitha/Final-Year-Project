@@ -1,0 +1,1 @@
+web: gunicorn staffreward.wsgi --log-file -

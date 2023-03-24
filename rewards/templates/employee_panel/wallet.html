@@ -1,0 +1,133 @@
+{% extends "employee_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+<div class="col-md-12 grid-margin stretch-card">
+  {% for message in messages %}
+    
+    <div class="alert alert-success">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+           {{ message }}
+    </div>
+
+{% endfor %}
+  <div class="container">
+  <div class="row">
+    {% for i in w %}
+    <div class="col-md-4">
+      <div class="wrapper d-flex justify-content-center align-items-center">
+        <div class="card">
+          <div class="cross-bg">
+            
+          </div>
+          <div class="content">
+            <div class="logo text-right">
+            </div>
+            <div class="text-center text-uppercase text-white off">
+              <h3 class="mt-0">{{i.rewardname}}</h3>
+            </div>
+            <div class="text-center text-white">
+              <span class="plus">+</span>
+            </div>
+          <div class="text-center text-uppercase text-white">
+            <h3 class="m-0">{{i.rewardtype}}</h3>
+          </div>
+          <div class="text-center text-uppercase text-white">
+            <i class="mdi mdi-coins" style="color: yellow;"></i><h5 class="m-0" style="color: yellow;">{{i.point}}</h5>
+          </div>
+          <div class="px-5 mb-3">
+            <div class="code text-center mt-4">
+              <span>{{i.rewardbenifit}}</span>
+            </div>
+            <div class="text-center mt-4">
+            <a class="btn btn-light" href='make_award/{{i.id}}' ><b>Redeem Now</b></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+</div>
+<style type="text/css">
+  body{
+
+  background-color: #eee;
+}
+
+.wrapper{
+
+  height: 70vh;
+}
+
+.card{
+    
+    position: relative;
+    background-color: #7B1FA2;
+    padding: 10px;
+    width: 400px;
+    border:none;
+   
+
+}
+
+.content{
+
+  z-index: 10;
+}
+
+.logo{
+
+  margin-bottom: 50px;
+}
+
+
+.off{
+
+      line-height: 0px;
+}
+
+.off h1{
+
+  font-size: 80px;
+}
+
+.off span{
+
+  margin-right: 111px;
+}
+
+
+.plus{
+  font-size: 23px;
+}
+
+.code{
+
+  text-transform: uppercase;
+  padding: 10px;
+  background-color: #fff;
+  color: red;
+  font-size: 20px;
+}
+
+.cross-bg{
+
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+  background-color: #9C27B0;
+
+  left: 0px;
+    top: 0px;
+    opacity: 0.4;
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+    z-index:1;
+}
+</style>
+
+{% endblock %}

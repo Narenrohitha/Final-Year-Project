@@ -1,0 +1,101 @@
+{% extends "admin_panel/base.html" %}
+{% load static %}
+{% block pagecontent %}
+<div class="content-wrapper">
+
+            <div class="page-header">
+              <h3 class="page-title"> Employee Tables</h3>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Employee Table</h4>
+                    <button type="button" class="btn btn-primary" onclick="location.href='/employee_add'">Add New +</button>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th> User </th>
+                            <th> Username</th>
+                            <th> Department </th>
+                            <th> Leader </th>
+                            <th> Action </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for i in emp %}
+                          <tr>
+                            <td class="py-1">
+                              <img src="{{i.profile.url}}" alt="image" />
+                            </td>
+                            <td>{{i.user.username}}</td>
+                            <td>{{i.dept}}</td>
+                            <td>{{i.leader}}</td>
+                            {% if i.status == 0 %}
+                            <td><button class='btn btn-success' id='active' data-catid="{{i.id}}">Active</button></td>
+                            {% else %}
+                            <td><button class='btn btn-danger' id='inactive' data-catid="{{i.id}}">Inactive</button></td>
+                            {% endif %}
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+     $("#active").on('click', function () {
+
+  var id =$(this).attr("data-catid");
+  var status = 1;
+
+  $.ajax({
+    url: '{% url "active" %}',
+    data: {
+      'status': status,
+      'id': id,
+    },
+    dataType: 'json',
+    success: function (data) {
+      if (data.success) {
+        location.reload();
+        // here you update the HTML to change the active to innactive
+      }else{
+        alert("ajax call not success.");
+      }
+    }
+  });
+
+});
+</script>
+<script type="text/javascript">
+     $("#inactive").on('click', function () {
+
+  var id =$(this).attr("data-catid");
+  var status = 0;
+
+  $.ajax({
+    url: '{% url "active" %}',
+    data: {
+      'status': status,
+      'id': id,
+    },
+    dataType: 'json',
+    success: function (data) {
+      if (data.success) {
+        location.reload();
+        // here you update the HTML to change the active to innactive
+      }else{
+        alert("ajax call not success.");
+      }
+    }
+  });
+
+});
+</script>
+{% endblock %}
